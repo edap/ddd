@@ -99,4 +99,9 @@ end = 'inception_4c/output'
 if len(sys.argv) >= 2:
 	end = sys.argv[1]
 
-_=deepdream(net, img, end)
+iter_n = 10
+if len(sys.argv) >= 3:
+	iteration = sys.argv[2]
+
+
+_=deepdream(net, img, end, iter_n)
