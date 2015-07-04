@@ -60,6 +60,10 @@ def make_step(net, step_size=1.5, end='inception_4c/output', jitter=32, clip=Tru
 		src.data[:] = np.clip(src.data, -bias, 255-bias)
 
 def deepdream(net, base_img, end, iter_n=10, octave_n=4, octave_scale=1.4, clip=True, **step_params):
+        # print "received option"
+	# print ("iter_n" + str(iter_n))
+	# print ("ocatve_n" + str(octave_n))
+	# print ("octave_scale" + str(octave_scale))
 	# prepare base images for all octaves
 	octaves = [preprocess(net, base_img)]
 	for i in xrange(octave_n-1):
@@ -101,7 +105,17 @@ if len(sys.argv) >= 2:
 
 iter_n = 10
 if len(sys.argv) >= 3:
-	iteration = sys.argv[2]
+	iter_n = sys.argv[2]
+        iter_n = int(iter_n)
 
+octave_n = 4
+if len(sys.argv) >= 4:
+	octave_n = sys.argv[3]
+        octave_n = int(octave_n)
 
-_=deepdream(net, img, end, iter_n)
+octave_scale = 1.4
+if len(sys.argv) >= 5:
+	octave_scale = sys.argv[4]
+        octave_scale = float(octave_scale)
+
+_=deepdream(net, img, end, iter_n, octave_n, octave_scale)
