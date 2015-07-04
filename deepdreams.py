@@ -60,11 +60,7 @@ def make_step(net, step_size=1.5, end='inception_4c/output', jitter=32, clip=Tru
 		src.data[:] = np.clip(src.data, -bias, 255-bias)
 
 def deepdream(net, base_img, end, iter_n=10, octave_n=4, octave_scale=1.4, clip=True, **step_params):
-        # print "received option"
-	# print ("iter_n" + str(iter_n))
-	# print ("ocatve_n" + str(octave_n))
-	# print ("octave_scale" + str(octave_scale))
-	# prepare base images for all octaves
+        # prepare base images for all octaves
 	octaves = [preprocess(net, base_img)]
 	for i in xrange(octave_n-1):
 		octaves.append(nd.zoom(octaves[-1], (1, 1.0/octave_scale,1.0/octave_scale), order=1))
